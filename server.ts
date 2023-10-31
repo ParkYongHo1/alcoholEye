@@ -1,11 +1,16 @@
 import express, { Request, Response } from 'express'
+import dotenv from 'dotenv'
+dotenv.config();
 const app = express();
 const port: number = 8090;
 import test from './routes/test';
+import pool from './server/pool';
 
 app.use("/test", test);
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
+  const users = await pool.query(`SELECT * FROM test`);
+  console.log(users);
   res.send('Hello');
 })
 
