@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.main_sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: #343a40;
+  z-index: 1;
+}
+.main_content {
+  margin-left: 20%;
+  width: 80%;
+  position: relative;
+}
+.brand_link {
+  text-align: center;
+  display: block;
+  padding: 13px 8px;
+  border-bottom: 1px solid #4b545c;
+}
+.brand_text {
+  font-size: 25px;
+  font-weight: 700;
+
+  color: rgba(255, 255, 255, 0.8);
+}
+.main_header_container {
+  position: relative;
+}
+.nav_item_title {
+  padding: 15px 10px;
+}
+.nav_item_title > span {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 500;
+}
+.nav_item_a {
+  padding: 10px 40px;
+}
+.nav_item_a:hover {
+  background-color: #28a745;
+}
+.nav_item_a > a {
+  text-decoration: none;
+}
+.nav_item_a > a > span {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 500;
+}
+.maing_header_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header_button_div {
+  width: 20%;
+}
+#fmm > button:hover {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+}
+#fmm > button {
+  padding: 5px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+}
+.content_header {
+  width: 100%;
+  background-color: #f4f6f9;
+  height: auto;
+}
+.content_div {
+  padding: 10px 10px;
+  display: flex;
+}
