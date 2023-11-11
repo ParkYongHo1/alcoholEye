@@ -91,4 +91,32 @@
 .content_div {
   padding: 10px 10px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content_title {
+  padding: 0px 40px;
+}
+.content_categori {
+  width: 20%;
+}
+.driver_list_div {
+  width: 90%;
+  margin: 10px auto;
+  padding: 20px 40px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.driver_list > span {
+  font-size: 20px;
+}
+.driver_search_div {
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+}
+.driver_search_title {
+  margin-right: 2%;
+}
+.driver_search_input > input {
+  padding: 10px 10px;
 }

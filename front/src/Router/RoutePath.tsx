@@ -1,11 +1,20 @@
 import LoginPage from '../Components/Login/LoginPage';
-import RootLayout from '../Components/Login/RootLayout';
+import MainPage from '../Components/Main/MainPage';
+import RootLayout from '../Components/Login/LoginId';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <LoginPage />,
+    children: [
+      {
+        path: '/',
+        element: <LoginPage />,
+      },
+      {
+        path: '/main',
+        element: <MainPage />,
+      },
+    ],
   },
 ]);
 

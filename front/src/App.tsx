@@ -10,16 +10,16 @@ import mainLogo from './img/mainLogo.png';
 
 function App() {
   const [member, setMember] = useState('');
-  // useEffect(() => {
-  //   axios
-  //     .get('test/admin')
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // });
+  useEffect(() => {
+    axios
+      .get('test/admin')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
   return (
     <>
       <RouterProvider router={router} />
