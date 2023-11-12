@@ -1,0 +1,44 @@
+.main_sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: #343a40;
+  z-index: 1;
+}
+
+.brand_link {
+  text-align: center;
+  display: block;
+  padding: 13px 8px;
+  border-bottom: 1px solid #4b545c;
+}
+.brand_text {
+  font-size: 25px;
+  font-weight: 700;
+
+  color: rgba(255, 255, 255, 0.8);
+}
+.nav_item_title {
+  padding: 15px 10px;
+}
+.nav_item_title > span {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 500;
+}
+.nav_item_a {
+  padding: 10px 40px;
+}
+.nav_item_a:hover {
+  background-color: #28a745;
+}
+.nav_item_a > a {
+  text-decoration: none;
+}
+.nav_item_a > a > span {
+  font-size: 15px;
+  color: #fff;
+  font-weight: 500;
+}

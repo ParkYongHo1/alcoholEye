@@ -8,6 +8,48 @@ router.get('/admin', (req: Request, res: Response) => {
     admin: '문진호, 전준호, 박용호',
   });
 });
+
+router.get('/allDriverInfo', async (req, res) => {
+  const sql = 'SELECT * FROM users';
+  try {
+    const results: Array<any> = await pool.query(sql);
+
+    if (results[0].length > 0) {
+      res.json({ result: results[0] });
+    } else {
+      res.json({
+        result: false,
+        message: '운전자 정보를 불러오는데 실패 했습니다.',
+      });
+    }
+  } catch (err) {
+    console.error('데이터베이스 오류:', err);
+    res.status(500).json({ result: false, message: '서버 오류' });
+  }
+});
+router.post('/driverInfo/:userNum', async (req, res) => {
+  const { userNum } = req.params;
+  console.log(userNum);
+
+  const sql = 'SELECT * FROM users where userNum=?';
+  try {
+    const results: Array<any> = await pool.query(sql, [userNum]);
+
+    if (results[0].length > 0) {
+      console.log(results);
+
+      res.json({ result: results[0] });
+    } else {
+      res.json({
+        result: false,
+        message: '운전자 정보를 불러오는데 실패 했습니다.',
+      });
+    }
+  } catch (err) {
+    console.error('데이터베이스 오류:', err);
+    res.status(500).json({ result: false, message: '서버 오류' });
+  }
+});
 router.post('/login', async (req, res) => {
   const userId = req.body.userId;
   const userPassword = req.body.userPassword;

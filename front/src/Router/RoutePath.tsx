@@ -1,6 +1,7 @@
 import LoginPage from '../Components/Login/LoginPage';
 import MainPage from '../Components/Main/MainPage';
 import RootLayout from '../Components/Login/LoginId';
+import DriverInfo from '../Components/Main/DriverInfo';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
         path: '/main',
         element: <MainPage />,
       },
+      { path: '/driverInfo/:userNumber', element: <DriverInfo /> },
     ],
   },
 ]);
