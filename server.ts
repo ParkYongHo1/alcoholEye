@@ -8,7 +8,7 @@ import test from './routes/test';
 import api from './routes/api';
 import pool from './server/pool';
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({limit: '100mb', extended: true}));
 
 try {
   fs.readdirSync('uploads');
