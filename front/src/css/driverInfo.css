@@ -1,0 +1,42 @@
+.driverInfo_container_top {
+  display: flex;
+
+  justify-content: center;
+  margin-top: 2%;
+}
+.driver_info_container {
+  width: 70%;
+}
+.driverInfo_table {
+  width: 100%;
+}
+.driverInfo_img_div {
+  width: 20%;
+}
+.driverInfo_img_div > table {
+  width: 100%;
+}
+.driverInfo_table_tr > th > div {
+  width: 150px;
+  padding: 5px 10px;
+}
+.driverInfo_table_tr > th > div > img {
+  width: 130px;
+  height: 165px;
+  border: 1px solid rgb(0, 0, 0, 0.8);
+}
+.driver_table_tr > th {
+  width: 100%;
+  text-align: start;
+}
+.driver_table_tr > td {
+  width: 100%;
+  text-align: start;
+}
+
+.dirverInfo_bold {
+  font-weight: 700;
+}
+.driverInfo_font {
+  font-size: 12px;
+}

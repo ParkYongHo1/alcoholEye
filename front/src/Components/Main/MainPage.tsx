@@ -4,15 +4,17 @@ import MainHeader from './MainHeader';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface UserInfo {
-  userId: string;
-  userPasswoed: string;
-  userName: string;
-  userBirth: string;
-  userGender: string;
-  userRoute: string;
-  userNum: number;
+  uno: number;
+  id: string;
+  passwoed: string;
+  name: string;
+  address: string;
+  image: string;
+  birth: string;
+  gender: string;
 }
 function MainPage() {
   const [copyUser, setCopyUser] = useState('');
@@ -26,7 +28,6 @@ function MainPage() {
   );
 
   useEffect(() => {
-    // 기존의 데이터 로딩 코드를 페이징을 고려하여 수정
     const fetchData = async () => {
       try {
         const response = await axios.get('test/allDriverInfo');
@@ -34,8 +35,6 @@ function MainPage() {
 
         const totalPages = Math.ceil(allDriverInfo.length / pageSize);
         setTotalPages(totalPages);
-
-        // 페이지당 사용자 수에 따라 데이터를 나누어 가져오기
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         const usersForCurrentPage = allDriverInfo.slice(startIndex, endIndex);
@@ -50,10 +49,10 @@ function MainPage() {
   }, [currentPage]);
   const handleNameClick = async (userNumber: number) => {
     try {
-      await axios.post(`/test/driverInfo/${userNumber}`);
+      await axios.post(`/drive/driverInfo/${userNumber}`);
       console.log('sf');
 
-      navigate(`/driverInfo/${userNumber}`);
+      navigate(`/drive/${userNumber}`);
     } catch (error) {
       console.error(error);
     }
@@ -103,16 +102,16 @@ function MainPage() {
               </thead>
               <tbody>
                 {usersForCurrentPage.map((user: UserInfo) => (
-                  <tr key={user?.userNum} className='driver_table_tbody_tr'>
-                    <td>{user.userId}</td>
+                  <tr key={user?.uno} className='driver_table_tbody_tr'>
+                    <td>{user.id}</td>
                     <td>
-                      <span onClick={() => handleNameClick(user.userNum)}>
-                        {user.userName}
+                      <span onClick={() => handleNameClick(user.uno)}>
+                        {user.name}
                       </span>
                     </td>
-                    <td>{user.userBirth}</td>
-                    <td>{user.userGender}</td>
-                    <td>{user.userRoute}</td>
+                    <td>{user.birth}</td>
+                    <td>{user.gender}</td>
+                    <td>{user.address}</td>
                   </tr>
                 ))}
               </tbody>

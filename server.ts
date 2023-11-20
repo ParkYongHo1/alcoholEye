@@ -6,20 +6,24 @@ const app = express();
 const port: number = 8090;
 import test from './routes/test';
 import api from './routes/api';
+import auth from './routes/auth';
+import drive from './routes/drive';
 import pool from './server/pool';
+
 app.use(express.json());
-app.use(express.urlencoded({limit: '100mb', extended: true}));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 try {
   fs.readdirSync('uploads');
 } catch (error) {
-  console.error("uploads 폴더가 없습니다. uploads 폴더를 생성합니다.");
-  fs.mkdirSync("uploads");
+  console.error('uploads 폴더가 없습니다. uploads 폴더를 생성합니다.');
+  fs.mkdirSync('uploads');
 }
 
 app.use('/test', test);
 app.use('/api', api);
-
+app.use('/auth', auth);
+app.use('/drive', drive);
 app.get('/', async (req: Request, res: Response) => {
   const users = await pool.query(`SELECT * FROM test`);
   console.log(users);

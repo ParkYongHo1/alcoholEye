@@ -13,7 +13,7 @@ function MainSide() {
               <span>운전자 관리</span>
             </div>
             <div className='nav_item_a'>
-              <a href=''>
+              <a href='/main'>
                 <span>운전자 관리</span>
               </a>
             </div>

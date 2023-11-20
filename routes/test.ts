@@ -3,14 +3,10 @@ import pool from '../server/pool';
 import bcrypt from 'bcrypt';
 const router: Router = express.Router();
 
-router.get('/admin', (req: Request, res: Response) => {
-  return res.status(200).json({
-    admin: '문진호, 전준호, 박용호',
-  });
-});
-
+// 모든 운전자 정보 불러오기
 router.get('/allDriverInfo', async (req, res) => {
   const sql = 'SELECT * FROM users';
+
   try {
     const results: Array<any> = await pool.query(sql);
 
@@ -27,13 +23,15 @@ router.get('/allDriverInfo', async (req, res) => {
     res.status(500).json({ result: false, message: '서버 오류' });
   }
 });
-router.post('/driverInfo/:userNum', async (req, res) => {
-  const { userNum } = req.params;
-  console.log(userNum);
+
+// 운전자 정보 상세 보기
+router.post('/driverInfo/:userNumber', async (req, res) => {
+  const { userNumber } = req.params;
+  console.log(userNumber);
 
   const sql = 'SELECT * FROM users where userNum=?';
   try {
-    const results: Array<any> = await pool.query(sql, [userNum]);
+    const results: Array<any> = await pool.query(sql, [userNumber]);
 
     if (results[0].length > 0) {
       console.log(results);
@@ -50,6 +48,8 @@ router.post('/driverInfo/:userNum', async (req, res) => {
     res.status(500).json({ result: false, message: '서버 오류' });
   }
 });
+
+// 로그인
 router.post('/login', async (req, res) => {
   const userId = req.body.userId;
   const userPassword = req.body.userPassword;

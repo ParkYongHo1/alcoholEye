@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         path: '/main',
         element: <MainPage />,
       },
-      { path: '/driverInfo/:userNumber', element: <DriverInfo /> },
+      { path: '/drive/:userUno', element: <DriverInfo /> },
     ],
   },
 ]);

@@ -17,14 +17,14 @@ function LoginPage() {
     event.preventDefault();
     console.log(userId, userPassword);
     axios
-      .post('test/login', {
+      .post('auth/signIn', {
         userId,
         userPassword,
       })
       .then((res: any) => {
-        console.log(res.data['result']);
+        console.log(res.data);
 
-        if (res.data['result'] === true) {
+        if (res.data === 'OK') {
           navigate('/main');
         }
       })

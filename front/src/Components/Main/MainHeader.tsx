@@ -5,8 +5,12 @@ function MainHeader() {
     <>
       <div className='main_header_container'>
         <div className='maing_header_content'>
-          <div>
-            <img src={mainLogo} />
+          <div
+            onClick={() => {
+              window.location.href = '/main';
+            }}
+          >
+            <img src={mainLogo} style={{ cursor: 'pointer' }} />
           </div>
           <div className='header_button_div'>
             <form action='' id='fmm'>
