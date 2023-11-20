@@ -1,7 +1,5 @@
 import express from 'express';
 import pool from '../server/pool';
-import fs from 'fs';
-import path from 'path';
 import bcrypt from 'bcrypt';
 const router = express.Router();
 
@@ -19,22 +17,19 @@ router.get('/idCheck', async (req, res, next) => {
   }
 });
 
-router.get('/signUp', async (req, res, next) => {
-  const userData = JSON.parse(req.query.data as string);
+router.post('/signUp', async (req, res, next) => {
+  interface User { //옮겨야 함.
+    'id': string,
+    'pw': string,
+    'name': string,
+    'address': string,
+    'birth': string,
+    'gender': string,
+  }
+  const user:User = JSON.parse(req.body.UserData)['nameValuePairs'];
   const signUpSql = 'insert into users(id, password, name, address, image, birth, gender )values(?, ?, ?, ?, ?, ?, ?)';
-  try {
-    await pool.query(signUpSql, [userData.join_id, userData.join_pw, userData.join_username, userData.join_address, `${userData.join_id}.png`, userData.join_birth, userData.join_gender]);
-
-    const base64: string = userData.join_img.replace(/^data:image\/\w+;base64,/, '');
-    const binaryData = Buffer.from(base64, 'base64');
-    const uploadDirRelative = '../uploads';
-    const userImageFileName = `${userData.join_id}.png`;
-    const imagePathRelative = path.join(uploadDirRelative, userImageFileName);
-    const imagePath = path.join(__dirname, imagePathRelative);
-    fs.writeFile(imagePath, binaryData, (err) => {
-      if (err) console.error(err);
-    });
-    
+    try {
+    await pool.query(signUpSql, [user.id, user.pw, user.name, user.address, `${user.id}.jpg`, user.birth, user.gender]);
     return res.send("OKSignUp");
   } catch (error) {
     console.log(error);
