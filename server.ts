@@ -35,14 +35,14 @@ const upload = multer({
 const uploadMiddleware = upload.single('join_img');
 
 app.use(uploadMiddleware);
+app.use(express.static(path.join(__dirname, "front/build")));
 app.use('/test', test); 
 app.use('/api', api);
 app.use('/auth', auth);
 app.use('/drive', drive);
-app.get('/', async (req: Request, res: Response) => {
-  const users = await pool.query(`SELECT * FROM test`);
-  console.log(users);
-  res.send('Hello');
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/front/build/index.html"));
 });
 
 app.listen(port, function () {
