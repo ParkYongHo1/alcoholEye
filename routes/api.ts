@@ -1,7 +1,31 @@
 import express from 'express';
 import pool from '../server/pool';
 import bcrypt from 'bcrypt';
+import User from '../model/User';
+import multer from 'multer';
+import path from 'path';
+
+const faceMatch = require('./faceMatch.js');
 const router = express.Router();
+
+const upload = multer({
+  storage: multer.diskStorage({
+    filename(req, file, done) {
+      if(req.route.path === '/checkUserImg') {
+        const user = JSON.parse(req.body.userId)['nameValuePairs'];
+        done(null, `${user.id}.jpg`);
+      }
+      if(req.route.path === '/signUp') {
+        const user = JSON.parse(req.body.UserData)['nameValuePairs'];
+        done(null, `${user.id}.jpg`);
+      }
+    },
+    destination(req, file, done) {
+      if(req.route.path === '/checkUserImg') done(null, path.join(__dirname, "../imgMatch"));
+      if(req.route.path === '/signUp') done(null, path.join(__dirname, "../uploads"));
+    },
+  }),
+});
 
 router.get('/idCheck', async (req, res, next) => {
   const user = JSON.parse(req.query.data as string);
@@ -17,15 +41,7 @@ router.get('/idCheck', async (req, res, next) => {
   }
 });
 
-router.post('/signUp', async (req, res, next) => {
-  interface User { //옮겨야 함.
-    'id': string,
-    'pw': string,
-    'name': string,
-    'address': string,
-    'birth': string,
-    'gender': string,
-  }
+router.post('/signUp', upload.single('join_img'), async (req, res, next) => {
   const user:User = JSON.parse(req.body.UserData)['nameValuePairs'];
   const signUpSql = 'insert into users(id, password, name, address, image, birth, gender )values(?, ?, ?, ?, ?, ?, ?)';
     try {
@@ -63,6 +79,12 @@ router.get('/signIn', async (req, res, next) => {
     next();
     return res.send("서버오류");
   }
+});
+
+router.post('/checkUserImg', upload.single('check_img'), async (req, res) => {
+  const user = JSON.parse(req.body.userId)['nameValuePairs'];
+  const isFaceMatched = await faceMatch(user.id);
+  return res.send(isFaceMatched);
 });
 
 export default router;
