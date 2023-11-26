@@ -42,3 +42,49 @@
   max-width: 100%;
   height: auto;
 }
+@media (min-width: 320px) and (max-width: 480px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px 8%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .container h2 {
+    margin-bottom: 20%;
+  }
+  .name_div {
+    margin-bottom: 15%;
+  }
+  .name_span {
+    font-weight: 700;
+    font-size: 30px;
+  }
+  .form-group > .username,
+  .form-group > .password {
+    width: 100%;
+    padding: 4%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .form-group2 > .submit {
+    width: 104%;
+    background-color: #121211;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 3%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .login_logo {
+    max-width: 100%;
+    height: auto;
+  }
+}

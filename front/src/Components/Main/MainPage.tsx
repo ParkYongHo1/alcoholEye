@@ -1,4 +1,5 @@
 import '../../css/login.css';
+import '../../css/main.css';
 import MainSide from './MainSide';
 import MainHeader from './MainHeader';
 import { useState, useEffect } from 'react';
@@ -76,28 +77,16 @@ function MainPage() {
               </div>
             </div>
           </div>
-          <div className='driver_list_div'>
-            <div className='driver_list'>
-              <span>운전자 리스트</span>
-            </div>
-            <div className='driver_search_div'>
-              <div className='driver_search_title'>
-                <span>이름</span>
-              </div>
-              <div className='driver_search_input'>
-                <input type='text' />
-              </div>
-            </div>
-          </div>
+
           <div className='driver_list_container'>
             <table>
               <thead>
                 <tr className='driver_table_tr'>
-                  <th>아이디</th>
-                  <th>이름</th>
-                  <th>생년월일</th>
-                  <th>성별</th>
-                  <th>노선</th>
+                  <th style={{ textAlign: 'center' }}>아이디</th>
+                  <th style={{ textAlign: 'center' }}>이름</th>
+                  <th style={{ textAlign: 'center' }}>생년월일</th>
+                  <th style={{ textAlign: 'center' }}>성별</th>
+                  <th style={{ textAlign: 'center' }}>노선</th>
                 </tr>
               </thead>
               <tbody>
