@@ -1,6 +1,5 @@
 import express from 'express';
 import pool from '../server/pool';
-import path from 'path';
 import bcrypt from 'bcrypt';
 const router = express.Router();
 

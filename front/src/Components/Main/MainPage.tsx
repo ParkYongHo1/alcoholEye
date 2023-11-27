@@ -18,8 +18,6 @@ interface UserInfo {
   gender: string;
 }
 function MainPage() {
-  const [copyUser, setCopyUser] = useState('');
-  const { userNumber } = useParams();
   const navigate = useNavigate();
   const pageSize = 10; // 한 페이지당 표시할 사용자 수
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,9 +48,7 @@ function MainPage() {
   }, [currentPage]);
   const handleNameClick = async (userNumber: number) => {
     try {
-      await axios.post(`/drive/driverInfo/${userNumber}`);
-      console.log('sf');
-
+      await axios.get(`/drive/driverInfo/${userNumber}`);
       navigate(`/drive/${userNumber}`);
     } catch (error) {
       console.error(error);

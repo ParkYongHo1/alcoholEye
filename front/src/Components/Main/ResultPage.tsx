@@ -53,9 +53,7 @@ function ResultPage() {
   }, [currentPage]);
   const handleNameClick = async (userNumber: number) => {
     try {
-      await axios.post(`/drive/driverInfo/${userNumber}`);
-      console.log('sf');
-
+      await axios.get(`/drive/driverInfo/${userNumber}`);
       navigate(`/drive/${userNumber}`);
     } catch (error) {
       console.error(error);
