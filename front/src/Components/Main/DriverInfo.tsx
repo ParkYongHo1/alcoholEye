@@ -19,17 +19,19 @@ function DriverInfo() {
   const userNumber = useParams();
   console.log(userNumber.userUno);
   const [driverInfo, setDriverInfo] = useState<UserInfo>();
+  const [driverImage, setDriverImage] = useState();
   useEffect(() => {
     axios
       .get(`driverInfo/${userNumber.userUno}`)
       .then((res) => {
-        setDriverInfo(res.data.result[0]);
-        console.log(res.data.result[0]);
+        setDriverImage(res.data.imgData);
+        setDriverInfo(res.data.result);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [userNumber.userUno]);
+  
   return (
     <>
       <div className='wrapper'>
@@ -58,7 +60,8 @@ function DriverInfo() {
                     <tr className='driverInfo_table_tr'>
                       <th>
                         <div>
-                          <img src={driverInfo?.image} alt='' />
+                          <img src={driverImage} alt='' />
+                          
                         </div>
                       </th>
                     </tr>

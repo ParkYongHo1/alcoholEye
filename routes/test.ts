@@ -1,22 +1,17 @@
 import express, { Request, Response, Router } from 'express';
 import pool from '../server/pool';
 import bcrypt from 'bcrypt';
+import User from '../model/User';
 const router: Router = express.Router();
 
 // 모든 운전자 정보 불러오기
 router.get('/allDriverInfo', async (req, res) => {
-  const sql = 'SELECT * FROM users';
-
+  const driverInfoSql = 'SELECT users.uno , users.id, users.name, users.birth, users.gender, result.bus_data, result.alcohol_data, date_format(result.reg_date, "%y-%m-%d-%H:%i") as reg_date FROM users join result on users.id = result.id';
   try {
-    const results: Array<any> = await pool.query(sql);
-
-    if (results[0].length > 0) {
-      res.json({ result: results[0] });
-    } else {
-      res.json({
-        result: false,
-        message: '운전자 정보를 불러오는데 실패 했습니다.',
-      });
+    const [driver] = await pool.query(driverInfoSql);
+    if(Array.isArray(driver)) {
+      if(driver.length > 0) res.json({ result: driver });
+      else res.json({ result: false, message: '운전자 정보를 불러오는데 실패 했습니다.'});
     }
   } catch (err) {
     console.error('데이터베이스 오류:', err);
@@ -27,22 +22,12 @@ router.get('/allDriverInfo', async (req, res) => {
 // 운전자 정보 상세 보기
 router.post('/driverInfo/:userNumber', async (req, res) => {
   const { userNumber } = req.params;
-  console.log(userNumber);
 
   const sql = 'SELECT * FROM users where userNum=?';
   try {
-    const results: Array<any> = await pool.query(sql, [userNumber]);
-
-    if (results[0].length > 0) {
-      console.log(results);
-
-      res.json({ result: results[0] });
-    } else {
-      res.json({
-        result: false,
-        message: '운전자 정보를 불러오는데 실패 했습니다.',
-      });
-    }
+    const user:User = await pool.query(sql, [userNumber])[0]
+    console.log(user.image);
+    
   } catch (err) {
     console.error('데이터베이스 오류:', err);
     res.status(500).json({ result: false, message: '서버 오류' });

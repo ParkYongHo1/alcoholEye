@@ -5,8 +5,8 @@ const tf = require('@tensorflow/tfjs-node');
 const faceapi = require('../dist/face-api.node.js');
 
 let optionsSSDMobileNet;
-const minConfidence = 0.1;
-const distanceThreshold = 0.6;
+const minConfidence = 0.2;
+const distanceThreshold = 0.5;
 const modelPath = 'model';
 const labeledFaceDescriptors = [];
 
@@ -62,11 +62,11 @@ async function main(userId) {
     const bestMatch = await findBestMatch(imgMatch);
     if(bestMatch.length == 0) {
       log.data("이미지 인식 불가능");
-      return "이미지 인식 불가능";
+      return 404;
     } else {
       if(bestMatch[0]._distance <= distanceThreshold) {
         log.data('동일한 사람:', bestMatch[0]._distance);
-        return "OK";
+        return true;
       } else {
         log.data('동일하지 않은 사람:', bestMatch[0]._distance);
         return false;
@@ -74,6 +74,7 @@ async function main(userId) {
     }
   } else {
     log.warn('No registered faces');
+    return 404;
   }
 }
 

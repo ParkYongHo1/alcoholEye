@@ -5,6 +5,7 @@ interface User {
   'address': string,
   'birth': string,
   'gender': string,
+  'image': string
 }
 
 export default User;

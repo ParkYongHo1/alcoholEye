@@ -12,7 +12,7 @@ interface UserInfo {
   id: string;
   passwoed: string;
   name: string;
-  address: string;
+  bus_data: string;
   image: string;
   birth: string;
   gender: string;
@@ -100,7 +100,7 @@ function MainPage() {
                     </td>
                     <td>{user.birth}</td>
                     <td>{user.gender}</td>
-                    <td>{user.address}</td>
+                    <td>{user.bus_data}</td>
                   </tr>
                 ))}
               </tbody>

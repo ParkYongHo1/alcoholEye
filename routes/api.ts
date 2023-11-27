@@ -84,7 +84,29 @@ router.get('/signIn', async (req, res, next) => {
 router.post('/checkUserImg', upload.single('check_img'), async (req, res) => {
   const user = JSON.parse(req.body.userId)['nameValuePairs'];
   const isFaceMatched = await faceMatch(user.id);
-  return res.send(isFaceMatched);
+
+  if(isFaceMatched === 404) {
+    return res.status(200).send("등록되지 않은 이미지 입니다.");
+  } else {
+    if(isFaceMatched) {
+      return res.status(200).send("OK");
+    } else {
+      return res.status(200).send("NO");
+    }
+  }
+});
+
+router.get('/alcohol', async (req, res, next) => {
+  const alcoholData = JSON.parse(req.query.alcoholData as string);
+  const alcoholDataSql = 'insert into result( id, alcohol_data, bus_data, reg_date )values(?, ?, ?, NOW())';
+  try {
+    await pool.query(alcoholDataSql, [alcoholData.id, alcoholData.alcohol, alcoholData.busName]);
+    return res.send("OK");
+  } catch (error) {
+    console.log(error);
+    next();
+    return res.send("NO");
+  }
 });
 
 export default router;

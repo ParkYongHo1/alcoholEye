@@ -12,10 +12,12 @@ interface UserInfo {
   id: string;
   passwoed: string;
   name: string;
-  address: string;
+  bus_data: string;
   image: string;
   birth: string;
   gender: string;
+  alcohol_data: string;
+  reg_date: string;
 }
 function ResultPage() {
   const [copyUser, setCopyUser] = useState('');
@@ -32,6 +34,7 @@ function ResultPage() {
     const fetchData = async () => {
       try {
         const response = await axios.get('test/allDriverInfo');
+        console.log(response);
         const allDriverInfo = response.data.result;
 
         const totalPages = Math.ceil(allDriverInfo.length / pageSize);
@@ -81,30 +84,29 @@ function ResultPage() {
           <div className='driver_list_container'>
             <table>
               <thead>
-                <tr className='driver_table_tr'>
-                  <th style={{ textAlign: 'center' }}>아이디</th>
-                  <th style={{ textAlign: 'center' }}>이름</th>
-                  <th style={{ textAlign: 'center' }}>생년월일</th>
-                  <th style={{ textAlign: 'center' }}>성별</th>
-                  <th style={{ textAlign: 'center' }}>노선</th>
-                  <th style={{ textAlign: 'center' }}>측정결과</th>
-                  <th style={{ textAlign: 'center' }}>측정일시</th>
+                <tr aria-colspan={7} className='driver_table_tr'>
+                  <th colSpan={1} style={{ textAlign: 'center' }}>아이디</th>
+                  <th colSpan={1} style={{ textAlign: 'center' }}>이름</th>
+                  <th colSpan={1} style={{ textAlign: 'center' }}>생년월일</th>
+                  <th colSpan={1} style={{ textAlign: 'center' }}>노선</th>
+                  <th colSpan={1} style={{ textAlign: 'center' }}>측정결과</th>
+                  <th colSpan={2} style={{ textAlign: 'center' }} >측정일시</th>
                 </tr>
               </thead>
               <tbody>
                 {usersForCurrentPage.map((user: UserInfo) => (
                   <tr key={user?.uno} className='driver_table_tbody_tr'>
-                    <td>{user.id}</td>
-                    <td>
+                    <td colSpan={1} >{user.id}</td>
+                    <td colSpan={1}>
                       <span onClick={() => handleNameClick(user.uno)}>
                         {user.name}
                       </span>
                     </td>
-                    <td>{user.birth}</td>
-                    <td>{user.gender}</td>
-                    <td>{user.address}</td>
-                    <td>측정결과</td>
-                    <td>측정일시</td>
+                    <td colSpan={1}>{user.birth}</td>
+                 
+                    <td colSpan={1}>{user.bus_data}</td>
+                    <td colSpan={1}>{user.alcohol_data}</td>
+                    <td colSpan={1}>{user.reg_date}</td>
                   </tr>
                 ))}
               </tbody>
